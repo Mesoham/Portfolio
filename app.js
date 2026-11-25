@@ -78,6 +78,7 @@ if (matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').mat
 }
 
 const dock = document.querySelector('header.nav');
+const dockNav = dock.querySelector('nav');
 const dockLinks = [...dock.querySelectorAll('a[href^="#"]')];
 const dockTargets = new Map(dockLinks.map(link => [document.querySelector(link.hash), link]));
 const dockSections = [...dockTargets.keys()].sort((first, second) =>
@@ -97,10 +98,14 @@ function updateDock() {
   if (page.scrollTop > 0 && page.scrollHeight - page.scrollTop - page.clientHeight < 3) {
     current = dockSections.at(-1);
   }
+  const currentLink = dockTargets.get(current);
   for (const link of dockLinks) {
-    if (link === dockTargets.get(current)) link.setAttribute('aria-current', 'location');
+    if (link === currentLink) link.setAttribute('aria-current', 'location');
     else link.removeAttribute('aria-current');
   }
+  dockNav.style.setProperty('--dock-left', currentLink.offsetLeft + 'px');
+  dockNav.style.setProperty('--dock-width', currentLink.offsetWidth + 'px');
+  dockNav.classList.add('dock-ready');
 }
 function scheduleDockUpdate() {
   if (!dockFrame) dockFrame = requestAnimationFrame(updateDock);
