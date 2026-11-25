@@ -156,7 +156,9 @@ function updatePhotoCaption() {
   typeNext();
 }
 
-photoTrack.addEventListener('scroll', updatePhotoCaption, { passive: true });
+photoTrack.addEventListener('scroll', () => {
+  if (carouselVisible) updatePhotoCaption();
+}, { passive: true });
 
 function movePhoto(offset) {
   const current = currentPhotoIndex();
@@ -191,7 +193,16 @@ reducedMotion.addEventListener('change', () => {
 });
 const photoObserver = new IntersectionObserver(entries => {
   carouselVisible = entries[0].isIntersecting;
-  if (carouselVisible) updatePhotoCaption();
+  if (!carouselVisible) {
+    clearTimeout(photoTimer);
+    clearTimeout(typingTimer);
+    photoTrack.scrollTo({ left: 0, behavior: 'instant' });
+    activePhoto = -1;
+    captionComplete = false;
+    photoCaption.textContent = slides[0].dataset.caption;
+    return;
+  }
+  updatePhotoCaption();
   startPhotos();
 });
 photoObserver.observe(carousel);
