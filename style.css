@@ -59,9 +59,9 @@ header.nav .small[aria-current]{background-color:var(--hover);color:var(--text)}
 
 header.nav .dock-short{display:none}
 @media(max-width:720px){
-  header.nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}
-  header.nav::-webkit-scrollbar{display:none}
-  header.nav nav{flex:0 0 auto;flex-wrap:nowrap}
+  header.nav{flex-wrap:nowrap;justify-content:center}
+  header.nav nav{flex:0 1 auto;min-width:0;flex-wrap:nowrap;justify-content:center}
+  header.nav nav a{padding-inline:clamp(4px,2vw,10px);font-size:clamp(.76rem,3.4vw,.9rem)}
   header.nav .dock-full{display:none}
   header.nav .dock-short{display:inline}
   html{scroll-padding-top:82px}
@@ -118,3 +118,7 @@ header.nav .dock-short{display:none}
 
 .job-mark.job-logo{width:100px;height:48px;flex:none;background:#fff}.job-logo img{display:block;object-fit:contain}
 
+
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.hero-top .eyebrow{margin:0}
+.hero-top .icon{flex:0 0 44px}
