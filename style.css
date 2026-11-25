@@ -124,3 +124,16 @@ header.nav .dock-short{display:none}
   header.nav nav a{padding-inline:4px}
   header.nav nav{gap:1px}
 }
+
+/* The active link shares a single moving glass highlight. */
+header.nav nav{position:relative;isolation:isolate}
+header.nav nav.dock-ready::before{
+  content:"";position:absolute;inset-block:0;left:0;width:var(--dock-width);
+  transform:translateX(var(--dock-left));border-radius:999px;pointer-events:none;z-index:-1;
+  background:linear-gradient(155deg,var(--highlight),transparent 72%),var(--hover);
+  border:1px solid var(--line);box-shadow:inset 0 1px 1px var(--highlight),0 3px 12px #111b4425;
+  transition:transform 420ms cubic-bezier(.22,1.35,.42,1),width 360ms cubic-bezier(.22,1.25,.42,1)
+}
+header.nav nav.dock-ready a[aria-current]{background:none;box-shadow:none}
+header.nav nav a{transition:background-color .18s,color .18s,transform .22s cubic-bezier(.22,1.35,.42,1)}
+header.nav nav a:active{transform:scale(.94)}
