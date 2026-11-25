@@ -59,11 +59,12 @@ header.nav .small[aria-current]{background-color:var(--hover);color:var(--text)}
 
 header.nav .dock-short{display:none}
 @media(max-width:720px){
-  header.nav{flex-wrap:wrap;justify-content:center;border-radius:24px}
-  header.nav nav{flex:0 1 auto;min-width:0;flex-wrap:wrap;justify-content:center}
+  header.nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}
+  header.nav::-webkit-scrollbar{display:none}
+  header.nav nav{flex:0 0 auto;flex-wrap:nowrap}
   header.nav .dock-full{display:none}
   header.nav .dock-short{display:inline}
-  html{scroll-padding-top:128px}
+  html{scroll-padding-top:82px}
 }
 
 .hero{grid-template-columns:1fr;min-height:auto}.hero-copy{width:100%}#work .visual{margin-top:22px;width:min(100%,670px);margin-inline:auto}#work .orb{width:min(57%,300px)}
